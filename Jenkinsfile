@@ -68,7 +68,9 @@ pipeline {
         
         stage('Docker deploy'){
             steps {
-                sh '''docker run -p 8086:8086 9246115521:spring-rest-pipeline'''
+	    	script {
+                	sh '''docker run -p 8086:8086 9246115521:spring-rest-pipeline'''
+		}
             }
         }
 }
