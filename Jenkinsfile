@@ -44,7 +44,7 @@ pipeline {
 
         stage('Build Docker image'){
             steps {
-            	 sh script: '''docker build -t 9246115521:spring-rest-pipeline:latest -f Dockerfile .'
+            	 sh script: '''docker build -t spring-rest-pipeline:latest -f Dockerfile .'
 		}
         }
 
