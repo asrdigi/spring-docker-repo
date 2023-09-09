@@ -56,7 +56,7 @@ pipeline {
             steps {
                  
 		   withCredentials([string(credentialsId: 'docker-id', variable: 'docker_id')]) {
-                    bat '''docker login    -u ${docker_id} -p ${docker_id}'''
+                    bat 'docker login    -u ${docker_id} -p ${docker_id}'
                  }
             }                
         }
