@@ -62,14 +62,14 @@ pipeline {
 
         stage('Docker Push'){
             steps {
-                sh '''docker push 9246115521:spring-rest-pipeline'''
+                sh 'docker push 9246115521:spring-rest-pipeline'
             }
         }
         
         stage('Docker deploy'){
             steps {
                
-                sh '''docker run -itd -p  8086:8086  9246115521:spring-rest-pipeline'''
+                sh 'docker run -itd -p  8086:8086  9246115521:spring-rest-pipeline'
             }
         }
 
