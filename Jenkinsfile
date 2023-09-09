@@ -61,7 +61,7 @@ pipeline {
         
         stage('Docker Push'){
             steps {
-                sh script '''docker push spring-rest-pipeline'''
+                sh script: '''docker push spring-rest-pipeline'''
             }
         } 
 }
