@@ -66,12 +66,12 @@ pipeline {
             }
         }
         
-        stage('Docker deploy'){
-            steps {
-	    	script {
-                	sh '''docker run -p 8086:8086 9246115521/spring-rest-pipeline'''
-		}
-            }
-        }
+       // stage('Docker deploy'){
+         //   steps {
+	    //	script {
+             //   	sh '''docker run -p 8086:8086 9246115521/spring-rest-pipeline'''
+		//}
+           // }
+        //}
 }
 }
