@@ -64,14 +64,6 @@ pipeline {
             steps {
                 sh 'docker push 9246115521/spring-rest-pipeline:latest'
             }
-        }
-        
-       // stage('Docker deploy'){
-         //   steps {
-	    //	script {
-             //   	sh '''docker run -p 8086:8086 9246115521/spring-rest-pipeline'''
-		//}
-           // }
-        //}
+        } 
 }
 }
