@@ -3,7 +3,7 @@ pipeline {
 
     environment
     {
-    dockerpassword=credentials('password') 
+    	password=credentials('password') 
     }
     
     stages {
