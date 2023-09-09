@@ -44,7 +44,7 @@ pipeline {
 
         stage('Build Docker image'){
             steps {
-            	 sh 'docker build -t 9246115521/spring-rest-pipeline .'
+            	 sh 'docker build -t 9246115521/spring-rest-pipeline:latest .'
 		}
         }
 
