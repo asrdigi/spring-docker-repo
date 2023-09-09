@@ -1,0 +1,82 @@
+pipeline {
+    agent any
+
+    environment
+    {
+    dockerpassword=credentials('docker_id') 
+    }
+    
+    stages {
+        stage('Compile and Clean') { 
+            steps {
+
+                sh 'mvn  -f sb-rest-pipeline-app/pom.xml compile'
+            }
+        }
+       
+	stage('Junit5 Test') { 
+            steps {
+
+                sh 'mvn -f sb-rest-pipeline-app/pom.xml test'
+            }
+        }
+
+	stage('Jacoco Coverage Report') {
+        	steps{
+            		jacoco()
+		}
+	}
+
+	stage('SonarQube'){
+		steps{
+				sh label: '', script: '''mvn sonar:sonar \
+				-Dsonar.host.url=http://localhost:9000 \
+				-Dsonar.login='squ_8545723f76f699081eb365fd34da843303f5b1cd''
+			}
+   	}
+        
+        stage('Maven Build') { 
+            steps {
+                sh 'mvn -f sb-rest-pipeline-app/pom.xml clean install'
+            }
+        }
+
+
+        stage('Build Docker image'){
+            steps {
+              	
+               
+            	 sh 'docker build -t    9246115521:spring-rest-pipeline --build-arg VER=1.0 .'
+		}
+        }
+
+        stage('Docker Login'){
+           
+	    
+            steps {
+                 
+		   withCredentials([string(credentialsId: 'docker-id', variable: 'docker_id')]) {
+                    bat 'docker login    -u ${docker_id} -p ${docker_id}'
+                 }
+            }                
+        }
+
+        stage('Docker Push'){
+            steps {
+                bat 'docker push 9246115521:spring-rest-pipeline'
+            }
+        }
+        
+        stage('Docker deploy'){
+            steps {
+               
+                bat 'docker run -itd -p  8086:8086  9246115521:spring-rest-pipeline'
+            }
+        }
+
+        
+       
+     
+    }
+}
+
