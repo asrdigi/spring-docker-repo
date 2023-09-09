@@ -72,10 +72,5 @@ pipeline {
                 sh 'docker run -itd -p  8086:8086  9246115521:spring-rest-pipeline'
             }
         }
-
-        
-       
-     
     }
 }
-
