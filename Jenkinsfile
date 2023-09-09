@@ -10,14 +10,14 @@ pipeline {
         stage('Compile and Clean') { 
             steps {
 
-                sh '''mvn  -f sb-rest-pipeline-app/pom.xml compile'''
+                sh 'mvn   compile'
             }
         }
        
 	stage('Junit5 Test') { 
             steps {
 
-                sh '''mvn -f sb-rest-pipeline-app/pom.xml test'''
+                sh 'mvn  test'
             }
         }
 
@@ -37,7 +37,7 @@ pipeline {
         
         stage('Maven Build') { 
             steps {
-                sh '''mvn -f sb-rest-pipeline-app/pom.xml clean install'''
+                sh 'mvn  clean install'
             }
         }
 
@@ -46,7 +46,7 @@ pipeline {
             steps {
               	
                
-            	 sh '''docker build -t    9246115521:spring-rest-pipeline --build-arg VER=1.0 .'''
+            	 sh 'docker build -t    9246115521:spring-rest-pipeline --build-arg VER=1.0 .'
 		}
         }
 
@@ -63,14 +63,14 @@ pipeline {
 
         stage('Docker Push'){
             steps {
-                bat '''docker push 9246115521:spring-rest-pipeline'''
+                sh 'docker push 9246115521:spring-rest-pipeline'
             }
         }
         
         stage('Docker deploy'){
             steps {
                
-                bat '''docker run -itd -p  8086:8086  9246115521:spring-rest-pipeline'''
+                sh 'docker run -itd -p  8086:8086  9246115521:spring-rest-pipeline'
             }
         }
 
