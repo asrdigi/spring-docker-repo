@@ -3,7 +3,7 @@ pipeline {
 
     environment
     {
-    dockerpassword=credentials('docker_id') 
+    dockerpassword=credentials('password') 
     }
     
     stages {
@@ -52,12 +52,13 @@ pipeline {
            
 	    
             steps {
-                 
-		   withCredentials([string(credentialsId: 'docker-id', variable: 'docker_id')]) {
-                    bat '''docker login -u ${docker_id} -p ${docker_id}'''
-                 }
+                    withCredentials([usernamePassword(credentialsId: 'docker_id', passwordVariable: 'password', usernameVariable: 'docker_id')]) {
+    			sh 'docker login -u $username -p $password'
+		       }
+		}
+		   
             }                
-        }
+        
 
         stage('Docker Push'){
             steps {
