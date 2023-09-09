@@ -62,7 +62,7 @@ pipeline {
 
         stage('Docker Push'){
             steps {
-                sh 'docker push 9246115521/spring-rest-pipeline:latest'
+                sh '''docker push 9246115521/spring-rest-pipeline:latest'''
             }
         } 
 }
