@@ -53,7 +53,7 @@ pipeline {
 	    
             steps {
                     withCredentials([usernamePassword(credentialsId: 'docker_id', passwordVariable: 'password', usernameVariable: 'docker_id')]) {
-    			sh 'docker login -u $username -p $password'
+    			sh '''docker login -u $username -p $password'''
 		       }
 		}
 		   
