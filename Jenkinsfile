@@ -1,10 +1,5 @@
 pipeline {
     agent any
-
-    environment
-    {
-    	password=credentials('password') 
-    }
     
     stages {
         stage('Compile and Clean') { 
@@ -46,18 +41,7 @@ pipeline {
             steps {
             	 sh script: '''docker build -t spring-rest-pipeline .'''
 		}
-        }
-
-        stage('Docker Login'){
-           
-	    
-            steps {
-                    withCredentials([usernamePassword(credentialsId: 'docker_id', passwordVariable: 'password', usernameVariable: 'docker_id')]) {
-    			sh script: '''docker login -u $username -p $password'''
-		       }
-		}
-		   
-            }                
+        }      
       
  }
 }
