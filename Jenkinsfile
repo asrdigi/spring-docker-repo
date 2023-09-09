@@ -10,14 +10,14 @@ pipeline {
         stage('Compile and Clean') { 
             steps {
 
-                sh 'mvn   compile'
+                sh '''mvn   compile'''
             }
         }
        
 	stage('Junit5 Test') { 
             steps {
 
-                sh 'mvn  test'
+                sh '''mvn  test'''
             }
         }
 
@@ -37,7 +37,7 @@ pipeline {
         
         stage('Maven Build') { 
             steps {
-                sh 'mvn  clean install'
+                sh '''mvn  clean install'''
             }
         }
 
@@ -46,7 +46,7 @@ pipeline {
             steps {
               	
                
-            	 sh 'docker build -t    9246115521:spring-rest-pipeline --build-arg VER=1.0 .'
+            	 sh '''docker build -t    9246115521:spring-rest-pipeline --build-arg VER=1.0 .'''
 		}
         }
 
@@ -56,21 +56,21 @@ pipeline {
             steps {
                  
 		   withCredentials([string(credentialsId: 'docker-id', variable: 'docker_id')]) {
-                    bat 'docker login    -u ${docker_id} -p ${docker_id}'
+                    bat '''docker login    -u ${docker_id} -p ${docker_id}'''
                  }
             }                
         }
 
         stage('Docker Push'){
             steps {
-                sh 'docker push 9246115521:spring-rest-pipeline'
+                sh '''docker push 9246115521:spring-rest-pipeline'''
             }
         }
         
         stage('Docker deploy'){
             steps {
                
-                sh 'docker run -itd -p  8086:8086  9246115521:spring-rest-pipeline'
+                sh '''docker run -itd -p  8086:8086  9246115521:spring-rest-pipeline'''
             }
         }
 
