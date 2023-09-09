@@ -44,8 +44,6 @@ pipeline {
 
         stage('Build Docker image'){
             steps {
-              	
-               
             	 sh '''docker build -t    9246115521:spring-rest-pipeline --build-arg VER=1.0 .'''
 		}
         }
