@@ -10,14 +10,14 @@ pipeline {
         stage('Compile and Clean') { 
             steps {
 
-                sh '''mvn   compile'''
+                sh script: '''mvn -f pom.xml compile'''
             }
         }
        
 	stage('Junit5 Test') { 
             steps {
 
-                sh '''mvn  test'''
+                sh script: '''mvn -f pom.xml test'''
             }
         }
 
@@ -37,14 +37,14 @@ pipeline {
         
         stage('Maven Build') { 
             steps {
-                sh '''mvn  clean install'''
+                sh script: '''mvn  clean install'''
             }
         }
 
 
         stage('Build Docker image'){
             steps {
-            	 sh 'docker build -t 9246115521/spring-rest-pipeline:latest .'
+            	 sh script: '''docker build -t 9246115521:spring-rest-pipeline:latest -f Dockerfile .'
 		}
         }
 
@@ -53,7 +53,7 @@ pipeline {
 	    
             steps {
                     withCredentials([usernamePassword(credentialsId: 'docker_id', passwordVariable: 'password', usernameVariable: 'docker_id')]) {
-    			sh '''docker login -u $username -p $password'''
+    			sh script: '''docker login -u $username -p $password'''
 		       }
 		}
 		   
@@ -62,7 +62,7 @@ pipeline {
 
         stage('Docker Push'){
             steps {
-                sh '''docker push 9246115521/spring-rest-pipeline:latest'''
+                sh script '''docker push 9246115521:spring-rest-pipeline:latest'''
             }
         } 
 }
