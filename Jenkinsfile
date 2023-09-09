@@ -64,5 +64,5 @@ pipeline {
              //   sh script: '''docker push 9246115521/spring-rest-pipeline'''
             //}
         //} 
-//}
+ }
 }
