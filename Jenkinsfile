@@ -33,7 +33,7 @@ pipeline {
 		steps{
 				sh 'mvn sonar:sonar \
 				-Dsonar.host.url=http://localhost:9000 \
-				-Dsonar.login=squ_8545723f76f699081eb365fd34da843303f5b1cd'
+				-Dsonar.login=1253462271033e5e26325c3fba29a9031551325'
 			}
    		}
 
@@ -41,7 +41,7 @@ pipeline {
 		steps{
 			echo 'Project packaging stage'
 // 			bat label: 'Project packaging', script: '''mvn package'''
-            sh 'mvn package'
+            sh 'mvn build'
 		}
 
 	}
