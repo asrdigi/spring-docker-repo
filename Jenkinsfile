@@ -52,12 +52,18 @@ pipeline {
 
 	}
 
-
-    stage('Docker Build Image') {
+   stage('Docker Build Image') {
+     agent any
       steps {
-        sh 'docker build -t 9246115521/spring-jenkins-docker .'
+      	sh 'docker build -t 9246115521/spring-jenkins-docker:latest .'
       }
     }
+	  
+    //stage('Docker Build Image') {
+      //steps {
+       // sh 'docker build -t 9246115521/spring-jenkins-docker .'
+      //}
+    //}
 	  
     stage('Login') {
       steps {
