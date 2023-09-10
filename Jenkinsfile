@@ -41,7 +41,7 @@ pipeline {
 		steps{
 			echo 'Project packaging stage'
 // 			bat label: 'Project packaging', script: '''mvn package'''
-            sh 'mvn build'
+            		sh 'mvn install'
 		}
 
 	}
