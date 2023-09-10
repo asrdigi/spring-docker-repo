@@ -4,6 +4,12 @@ pipeline {
     maven 'Maven3.8.7'
     jdk 'JDK17'
   }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '5'))
+  }
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('mydockerid')
+  }	
   stages {
 
 	stage('Maven Compile'){
