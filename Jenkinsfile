@@ -10,7 +10,7 @@ pipeline {
 		steps{
 			echo 'Project compile stage'
 // 			bat label: 'Compilation running', script: '''mvn compile'''
-            sh 'mvn compile'
+            sh 'mvn clean compile'
 	       	}
 	}
 
