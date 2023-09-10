@@ -53,6 +53,26 @@ pipeline {
 	}
 
 
+    stage('Docker Build Image') {
+      steps {
+        sh 'docker build -t 9246115521/spring-jenkins-docker .'
+      }
+    }
+	  
+    stage('Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+	  
+    stage('Push') {
+      steps {
+        sh 'docker push 9246115521/spring-jenkins-docker'
+      }
+    }
+	  
+
+
   }
 
   
